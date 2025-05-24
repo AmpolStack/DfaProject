@@ -13,7 +13,10 @@ app.UseHttpsRedirection();
 app.MapGet("/", () => Results.Redirect("/home", permanent: true));
 
 //For Frontend Endpoints
-app.MapComponents(Directory.GetCurrentDirectory());
+var components = new List<ViewRouteComponent>();
+app.Configuration.GetSection("Components").Bind(components);
+
+app.MapComponents(Directory.GetCurrentDirectory(), components);
 
 //For backend endpoints
 app.MapPost("/validate", ([FromBody] ValidateInputRequest request) => Results.Ok("ok"));
