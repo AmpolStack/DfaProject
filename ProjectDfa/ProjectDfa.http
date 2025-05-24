@@ -1,7 +1,17 @@
 # Just in local
 @ProjectDfa_HostAddress = https://localhost:7225
 
-GET {{ProjectDfa_HostAddress}}/weatherforecast/
+POST {{ProjectDfa_HostAddress}}/validate/
 Accept: application/json
+Content-Type: application/json
+
+{
+  "input": "abc123!",
+  "allowNumbers": true,
+  "allowLetters": true,
+  "allowSpecials": true
+}
+
+
 
 ###

@@ -1,9 +1,9 @@
 ﻿namespace ProjectDfa.Custom;
 
-public class RegexRequest
+public class ValidateInputRequest
 {
-    public required string Input { get; set; }
-    public bool AllowNumbers { get; set; }
-    public bool AllowLetters { get; set; }
-    public bool AllowSpecials { get; set; }
+    public required string Input { get; init; }
+    public bool AllowNumbers { get; init; }
+    public bool AllowLetters { get; init; }
+    public bool AllowSpecials { get; init; }
 }
