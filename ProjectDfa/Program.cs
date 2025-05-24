@@ -6,11 +6,11 @@ using ProjectDfa.Dfa.RegexValidator;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IDfa<ValidateInputRequest, RegexStates>, RegexDfa>();
+builder.Services.AddScoped<IDfa<ValidateInputRequest, RegexValidatorStates>, RegexValidatorDfa>();
+builder.Services.AddScoped<IRegexValidatorService, RegexValidatorService>();
 
 var app = builder.Build();
 
-app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 //If 'permanent' parameter is set the response code is 301, else is 302
@@ -23,7 +23,13 @@ app.Configuration.GetSection("Components").Bind(components);
 app.MapComponents(Directory.GetCurrentDirectory(), components);
 
 //For backend endpoints
-app.MapPost("/validate", ([FromBody] ValidateInputRequest request) => Results.Ok("ok"));
+app.MapPost("/validate", ([FromBody] ValidateInputRequest request,
+    [FromServices] IRegexValidatorService service) =>
+{
+    var result = service.Validate(request);
+    return result.Equals(false) ? Results.BadRequest("The request is invalid") : Results.Ok("The request is valid");
+});
+
 
 app.Run();
 

@@ -1,6 +1,6 @@
 ﻿namespace ProjectDfa.Dfa.RegexValidator;
 
-public enum RegexStates
+public enum RegexValidatorStates
 {
     Start,
     Accepted
