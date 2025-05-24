@@ -1,4 +1,5 @@
-@ProjectDfa_HostAddress = http://localhost:5140
+# Just in local
+@ProjectDfa_HostAddress = https://localhost:7225
 
 GET {{ProjectDfa_HostAddress}}/weatherforecast/
 Accept: application/json
