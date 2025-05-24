@@ -1,4 +1,4 @@
-﻿namespace ProjectDfa.RequestObjects;
+﻿namespace ProjectDfa.Custom;
 
 public class RegexRequest
 {
