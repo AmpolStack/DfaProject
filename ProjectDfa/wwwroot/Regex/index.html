@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">    <title>DProj | Regex Evaluator</title>
+    <script src="regex.js" defer></script>
+</head>
+<body>
+<div class="main-container">
+    <h1>Regex Evaluator</h1>
+    <form method="post" action="/validate">
+        <label for="input">Entrada:</label>
+        <input type="text" id="input" name="input" required placeholder="Ingresa el texto a evaluar...">
+        <label>
+            <input type="checkbox" name="allowNumbers" checked>
+            Permitir números (0–9)
+        </label>
+        <label>
+            <input type="checkbox" name="allowLetters" checked>
+            Permitir letras (A–Z, a–z)
+        </label>
+        <label>
+            <input type="checkbox" name="allowSpecials">
+            Permitir caracteres especiales
+        </label>
+        <button type="submit">Validar</button>
+    </form>
+</div>
+<footer>
+    <a class="repo-link" href="https://github.com/AmpolStack/DfaProject.git" target="_blank" rel="noopener noreferrer">Ir al repositorio</a>
+    <a class="repo-link" href="../index.html">Volver</a>
+    <p>@2024 Amapola</p>
+</footer>
+</body>
+</html>
