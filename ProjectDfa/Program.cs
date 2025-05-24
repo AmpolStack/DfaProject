@@ -1,8 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjectDfa;
 using ProjectDfa.Custom;
+using ProjectDfa.Dfa;
+using ProjectDfa.Dfa.RegexValidator;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<IDfa<ValidateInputRequest, RegexStates>, RegexDfa>();
 
 var app = builder.Build();
 
