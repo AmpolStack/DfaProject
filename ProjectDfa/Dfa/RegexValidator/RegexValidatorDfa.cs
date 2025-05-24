@@ -2,14 +2,14 @@
 
 namespace ProjectDfa.Dfa.RegexValidator;
 
-public class RegexDfa : IDfa<ValidateInputRequest, RegexStates> 
+public class RegexDfa : IDfa<ValidateInputRequest, RegexValidatorStates> 
 {
-    public DfaBase<RegexStates> BuildDfa(ValidateInputRequest data)
+    public DfaBase<RegexValidatorStates> BuildDfa(ValidateInputRequest data)
     {
-        var dfa = new DfaBase<RegexStates>()
+        var dfa = new DfaBase<RegexValidatorStates>()
         {
-            StartState = RegexStates.Start,
-            AcceptStates = [RegexStates.Accepted]
+            StartState = RegexValidatorStates.Start,
+            AcceptStates = [RegexValidatorStates.Accepted]
         };
         
         var allowedChars = new HashSet<char>();
@@ -43,8 +43,8 @@ public class RegexDfa : IDfa<ValidateInputRequest, RegexStates>
         foreach (var c in allowedChars)
         {
             // Define all transitions in DFA
-            dfa.Transitions[(RegexStates.Start, c)] = RegexStates.Accepted;
-            dfa.Transitions[(RegexStates.Accepted, c)] = RegexStates.Accepted;
+            dfa.Transitions[(RegexValidatorStates.Start, c)] = RegexValidatorStates.Accepted;
+            dfa.Transitions[(RegexValidatorStates.Accepted, c)] = RegexValidatorStates.Accepted;
         }
         
         return dfa;
