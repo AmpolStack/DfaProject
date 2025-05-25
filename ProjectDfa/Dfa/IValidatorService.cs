@@ -2,7 +2,7 @@
 
 namespace ProjectDfa.Dfa;
 
-public interface IRegexValidatorService
+public interface IValidatorService
 {
     public bool Validate(ValidateInputRequest request);
 }

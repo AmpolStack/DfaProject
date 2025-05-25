@@ -4,12 +4,14 @@ using ProjectDfa.Custom;
 using ProjectDfa.Dfa;
 using ProjectDfa.Dfa.EmailValidator;
 using ProjectDfa.Dfa.RegexValidator;
+using ProjectDfa.Dfa.VendingMachine;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IDfa<ValidateInputRequest, char, RegexValidatorStates>, RegexValidatorDfa>();
 builder.Services.AddScoped<IDfa<EmailValidatorStates, char>, EmailValidatorDfa>();
-builder.Services.AddScoped<IRegexValidatorService, RegexValidatorService>();
+builder.Services.AddScoped<IValidatorService, ValidatorService>();
+builder.Services.AddScoped<IDfa<VendingMachineStates, VendingMachineInputs>>();
 
 var app = builder.Build();
 
@@ -26,7 +28,7 @@ app.MapComponents(Directory.GetCurrentDirectory(), components);
 
 //For backend endpoints
 app.MapPost("/validate", ([FromBody] ValidateInputRequest request,
-    [FromServices] IRegexValidatorService service) =>
+    [FromServices] IValidatorService service) =>
 {
     var result = service.Validate(request);
     return result.Equals(false) ? Results.BadRequest("The request is invalid") : Results.Ok("The request is valid");

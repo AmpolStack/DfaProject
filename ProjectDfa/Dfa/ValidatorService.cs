@@ -5,10 +5,10 @@ using ProjectDfa.Dfa.RegexValidator;
 
 namespace ProjectDfa.Dfa;
 
-public class RegexValidatorService(
+public class ValidatorService(
     IDfa<ValidateInputRequest, char, RegexValidatorStates> regexDfa,
     IDfa<EmailValidatorStates, char> emailDfa
-    ) : IRegexValidatorService
+    ) : IValidatorService
 {
     public bool Validate(ValidateInputRequest request)
     {
