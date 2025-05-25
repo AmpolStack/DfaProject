@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using ProjectDfa.Custom;
-using ProjectDfa.Dfa.RegexValidator;
+﻿
 
 namespace ProjectDfa.Dfa.EmailValidator;
 
@@ -59,7 +57,10 @@ public class EmailValidatorDfa : IDfa<EmailValidatorStates>
     => dfa.Transitions.Add((EmailValidatorStates.LocalBaseChar, '@'), EmailValidatorStates.DomainBaseChar);
 
     private static void BuildDotTransitions(DfaBase<EmailValidatorStates> dfa)
-        => dfa.Transitions.Add((EmailValidatorStates.DomainBaseChar, '.'), EmailValidatorStates.DomainDot);
+    {
+        dfa.Transitions.Add((EmailValidatorStates.DomainBaseChar, '.'), EmailValidatorStates.DomainDot);
+        dfa.Transitions.Add((EmailValidatorStates.Accepted, '.'), EmailValidatorStates.DomainDot);
+    }
 
 
 

@@ -2,9 +2,9 @@
 
 namespace ProjectDfa.Dfa.RegexValidator;
 
-public class RegexValidatorDfa : IDfa<ValidateInputRequest, RegexValidatorStates> 
+public class RegexValidatorDfa : IDfa<ValidateInputBase, RegexValidatorStates> 
 {
-    public DfaBase<RegexValidatorStates> BuildDfa(ValidateInputRequest data)
+    public DfaBase<RegexValidatorStates> BuildDfa(ValidateInputBase data)
     {
         var dfa = new DfaBase<RegexValidatorStates>()
         {
