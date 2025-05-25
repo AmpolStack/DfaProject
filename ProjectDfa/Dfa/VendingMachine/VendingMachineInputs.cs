@@ -4,6 +4,6 @@ public enum VendingMachineInputs
 {
     InsertCoin,
     SelectProduct,
-    RequestChange,
-    Wait
+    Dispense,
+    RequestChange
 }

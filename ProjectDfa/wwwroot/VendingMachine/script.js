@@ -1,6 +1,6 @@
 ﻿class VendingMachineAPI {
     constructor() {
-        this.baseUrl = '/api/vending-machine';
+        this.baseUrl = '/machine';
         this.setupEventListeners();
         this.updateState();
     }
@@ -14,9 +14,9 @@
 
     async updateState() {
         try {
-            const response = await fetch(`${this.baseUrl}/state`);
+            const response = await fetch(`${this.baseUrl}/wait`);
             const data = await response.json();
-
+            console.log(data);
             document.getElementById('current-state').textContent = data.state;
             document.getElementById('current-credit').textContent = data.credit.toFixed(2);
 
@@ -63,7 +63,7 @@
 
     async insertCoin() {
         try {
-            const response = await fetch(`${this.baseUrl}/insert-coin`, { method: 'POST' });
+            const response = await fetch(`${this.baseUrl}/insertCoin`, { method: 'GET' });
             const data = await response.json();
 
             if (response.ok) {
@@ -80,10 +80,10 @@
 
     async selectProduct() {
         try {
-            const response = await fetch(`${this.baseUrl}/select-product`, {
-                method: 'POST',
+            const response = await fetch(`${this.baseUrl}/selectProduct`, {
+                method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ productCode: 'A1' })
+                // body: JSON.stringify({ productCode: 'A1' })
             });
             const data = await response.json();
 
@@ -101,7 +101,7 @@
 
     async dispense() {
         try {
-            const response = await fetch(`${this.baseUrl}/dispense`, { method: 'POST' });
+            const response = await fetch(`${this.baseUrl}/wait`, { method: 'GET' });
             const data = await response.json();
 
             if (response.ok) {
@@ -118,7 +118,7 @@
 
     async returnMoney() {
         try {
-            const response = await fetch(`${this.baseUrl}/return-money`, { method: 'POST' });
+            const response = await fetch(`${this.baseUrl}/requestChange`, { method: 'GET' });
             const data = await response.json();
 
             if (response.ok) {

@@ -7,10 +7,10 @@ public class VendingMachineDfa : IDfa<VendingMachineStates, VendingMachineInputs
         var dfa = new DfaBase<VendingMachineStates, VendingMachineInputs>()
         {
             StartState = VendingMachineStates.WaitingForCoin,
-            AcceptStates = [VendingMachineStates.WaitingForRestart]
+            AcceptStates = [VendingMachineStates.ProductDelivered]
         };
-        
-        WaitInputTransitions(dfa);
+
+        DispenseInputTransitions(dfa);
         InsertCoinInputTransitions(dfa);
         SelectProductInputTransitions(dfa);
         RequestChangeInputTransitions(dfa);
@@ -18,12 +18,10 @@ public class VendingMachineDfa : IDfa<VendingMachineStates, VendingMachineInputs
         return dfa;
     }
 
-    private static void WaitInputTransitions(DfaBase<VendingMachineStates, VendingMachineInputs> dfa)
+    private static void DispenseInputTransitions(DfaBase<VendingMachineStates, VendingMachineInputs> dfa)
     {
-        const VendingMachineInputs input = VendingMachineInputs.Wait;
-        dfa.Transitions.Add((VendingMachineStates.WaitingForCoin, input), VendingMachineStates.WaitingForCoin);
+        const VendingMachineInputs input = VendingMachineInputs.Dispense;
         dfa.Transitions.Add((VendingMachineStates.ProductSelected, input), VendingMachineStates.ProductDelivered);
-        dfa.Transitions.Add((VendingMachineStates.WaitingForRestart, input), VendingMachineStates.WaitingForCoin);
     }
     
     private static void InsertCoinInputTransitions(DfaBase<VendingMachineStates, VendingMachineInputs> dfa)
@@ -45,8 +43,8 @@ public class VendingMachineDfa : IDfa<VendingMachineStates, VendingMachineInputs
         const VendingMachineInputs input = VendingMachineInputs.RequestChange;
         dfa.Transitions.Add((VendingMachineStates.CoinInserted, input), VendingMachineStates.WaitingForCoin);
         dfa.Transitions.Add((VendingMachineStates.ProductSelected, input), VendingMachineStates.WaitingForCoin);
-        dfa.Transitions.Add((VendingMachineStates.ProductDelivered, input), VendingMachineStates.WaitingForRestart);
-
+        dfa.Transitions.Add((VendingMachineStates.ProductDelivered, input), VendingMachineStates.WaitingForCoin);
+        dfa.Transitions.Add((VendingMachineStates.WaitingForCoin, input), VendingMachineStates.WaitingForCoin);
     }
     
     

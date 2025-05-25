@@ -11,7 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IDfa<ValidateInputRequest, char, RegexValidatorStates>, RegexValidatorDfa>();
 builder.Services.AddScoped<IDfa<EmailValidatorStates, char>, EmailValidatorDfa>();
 builder.Services.AddScoped<IValidatorService, ValidatorService>();
-builder.Services.AddScoped<IDfa<VendingMachineStates, VendingMachineInputs>>();
+builder.Services.AddScoped<IDfa<VendingMachineStates, VendingMachineInputs>, VendingMachineDfa>();
+builder.Services.AddScoped<IMachineService, MachineService>();
 
 var app = builder.Build();
 
@@ -32,6 +33,34 @@ app.MapPost("/validate", ([FromBody] ValidateInputRequest request,
 {
     var result = service.Validate(request);
     return result.Equals(false) ? Results.BadRequest("The request is invalid") : Results.Ok("The request is valid");
+});
+
+app.MapGet("/machine/insertCoin", async (
+    [FromServices] IMachineService service) =>
+{
+    var result = await service.ExecuteInsertCoin();
+    return result ? Results.Ok() : Results.BadRequest("The request is invalid");
+});
+
+app.MapGet("/machine/selectProduct", async (
+    [FromServices] IMachineService service) =>
+{
+    var result = await service.ExecuteSelectProduct();
+    return result ? Results.Ok() : Results.BadRequest("The request is invalid");
+});
+
+app.MapGet("/machine/requestChange", async (
+    [FromServices] IMachineService service) =>
+{
+    var result = await service.ExecuteRequestChange();
+    return result ? Results.Ok() : Results.BadRequest("The request is invalid");
+});
+
+app.MapGet("/machine/wait", async (
+    [FromServices] IMachineService service) =>
+{
+    var result = await service.ExecuteDispense();
+    return result ? Results.Ok() : Results.BadRequest("The request is invalid");
 });
 
 
