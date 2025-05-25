@@ -1,6 +1,19 @@
 ﻿document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
 
+    const emailCheckbox = form.querySelector('input[name="allowEmail"]');
+    const otherCheckboxes = form.querySelectorAll('input[type="checkbox"]:not([name="allowEmail"])');
+
+    // Función para manejar el cambio en el checkbox de email
+    emailCheckbox.addEventListener('change', () => {
+        otherCheckboxes.forEach(checkbox => {
+            checkbox.disabled = emailCheckbox.checked;
+            if (emailCheckbox.checked) {
+                checkbox.checked = false;
+            }
+        });
+    });
+    
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -9,6 +22,7 @@
         const allowNumbers = formData.get('allowNumbers') === 'on';
         const allowLetters = formData.get('allowLetters') === 'on';
         const allowSpecials = formData.get('allowSpecials') === 'on';
+        const allowEmail = formData.get('allowEmail') === 'on';
 
         try {
             const response = await fetch('/validate', {
@@ -20,7 +34,8 @@
                     input,
                     allowNumbers,
                     allowLetters,
-                    allowSpecials
+                    allowSpecials,
+                    allowEmail
                 })
             });
 

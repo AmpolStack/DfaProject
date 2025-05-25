@@ -53,6 +53,11 @@ input[type="checkbox"]:checked {
     background-color: var(--primary-color);
     position: relative;
 }
+input[type="checkbox"]:disabled {
+    opacity: 0.5;
+    cursor: default;
+    border-color: rgba(0, 0, 238, 0.5);
+}
 
 input[type="checkbox"]:checked::after {
     content: "X";
