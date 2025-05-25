@@ -1,5 +1,7 @@
 ﻿
 
+using ProjectDfa.Services;
+
 namespace ProjectDfa.Dfa.EmailValidator;
 
 public class EmailValidatorDfa : IDfa<EmailValidatorStates, char>

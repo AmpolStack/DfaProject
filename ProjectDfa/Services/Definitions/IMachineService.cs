@@ -1,7 +1,4 @@
-﻿using ProjectDfa.Custom;
-using ProjectDfa.Dfa.VendingMachine;
-
-namespace ProjectDfa.Dfa;
+﻿namespace ProjectDfa.Services;
 
 public interface IMachineService
 {

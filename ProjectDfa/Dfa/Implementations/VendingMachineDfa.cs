@@ -1,4 +1,8 @@
-﻿namespace ProjectDfa.Dfa.VendingMachine;
+﻿using ProjectDfa.Dfa.Inputs;
+using ProjectDfa.Dfa.States;
+using ProjectDfa.Services;
+
+namespace ProjectDfa.Dfa.VendingMachine;
 
 public class VendingMachineDfa : IDfa<VendingMachineStates, VendingMachineInputs>
 {

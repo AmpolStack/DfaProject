@@ -1,6 +1,7 @@
-﻿using ProjectDfa.Dfa.VendingMachine;
+﻿using ProjectDfa.Dfa;
+using ProjectDfa.Dfa.VendingMachine;
 
-namespace ProjectDfa.Dfa;
+namespace ProjectDfa.Services;
 
 public class MachineService : IMachineService
 {

@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Server.Kestrel.Transport.Quic;
-using ProjectDfa.Custom;
+﻿using ProjectDfa.Custom;
+using ProjectDfa.Dfa;
 using ProjectDfa.Dfa.EmailValidator;
 using ProjectDfa.Dfa.RegexValidator;
 
-namespace ProjectDfa.Dfa;
+namespace ProjectDfa.Services;
 
 public class ValidatorService(
     IDfa<ValidateInputRequest, char, RegexValidatorStates> regexDfa,
