@@ -2,11 +2,11 @@
 
 namespace ProjectDfa.Dfa.RegexValidator;
 
-public class RegexValidatorDfa : IDfa<ValidateInputBase, RegexValidatorStates> 
+public class RegexValidatorDfa : IDfa<ValidateInputBase, char, RegexValidatorStates> 
 {
-    public DfaBase<RegexValidatorStates> BuildDfa(ValidateInputBase data)
+    public DfaBase<RegexValidatorStates, char> BuildDfa(ValidateInputBase data)
     {
-        var dfa = new DfaBase<RegexValidatorStates>()
+        var dfa = new DfaBase<RegexValidatorStates, char>()
         {
             StartState = RegexValidatorStates.Start,
             AcceptStates = [RegexValidatorStates.Accepted]

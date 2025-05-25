@@ -7,8 +7,8 @@ using ProjectDfa.Dfa.RegexValidator;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IDfa<ValidateInputRequest, RegexValidatorStates>, RegexValidatorDfa>();
-builder.Services.AddScoped<IDfa<EmailValidatorStates>, EmailValidatorDfa>();
+builder.Services.AddScoped<IDfa<ValidateInputRequest, char, RegexValidatorStates>, RegexValidatorDfa>();
+builder.Services.AddScoped<IDfa<EmailValidatorStates, char>, EmailValidatorDfa>();
 builder.Services.AddScoped<IRegexValidatorService, RegexValidatorService>();
 
 var app = builder.Build();

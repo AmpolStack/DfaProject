@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/machine/styles">
+    <link rel="stylesheet" href="/home/common">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <title>DProj | Vending Machine</title>
+    <script src="/machine/script" defer></script>
+</head>
+<body>
+<div class="main-container">
+    <h1>Vending Machine</h1>
+    <div class="machine-container">
+        <div class="display">
+            <p class="state">Estado: <span id="current-state">ESPERANDO</span></p>
+            <p class="credit">Crédito: $<span id="current-credit">0.00</span></p>
+        </div>
+        <div class="actions">
+            <button id="insert-coin">Insertar Moneda ($1)</button>
+            <button id="select-product">Seleccionar Producto (A1)</button>
+            <button id="dispense">Dispensar</button>
+            <button id="return-money">Devolver Dinero</button>
+        </div>
+    </div>
+</div>
+<footer>
+    <a class="repo-link" href="https://github.com/AmpolStack/DfaProject.git" target="_blank" rel="noopener noreferrer">Ir al repositorio</a>
+    <a class="repo-link" href="/home">Volver</a>
+    <p>@2024 Amapola</p>
+</footer>
+</body>
+</html>

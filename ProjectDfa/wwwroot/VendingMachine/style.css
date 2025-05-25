@@ -1,0 +1,122 @@
+﻿@import url('../common.css');
+
+.machine-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.display {
+    background-color: var(--primary-color);
+    color: #4CAF50;
+    color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+.display p {
+    margin: 0.5rem 0;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.actions button {
+    padding: 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    background-color: white;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: "Pixelify Sans";
+}
+
+.actions button:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.actions button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Popup Styles */
+.popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem;
+    border-radius: 8px;
+    animation: slideIn 0.3s ease-out;
+    z-index: 1000;
+}
+
+.popup-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.popup.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.popup.error {
+    background-color: #f44336;
+    color: white;
+}
+
+.popup.info {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.popup button {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Pixelify Sans";
+    transition: all 0.3s ease;
+}
+
+.popup button:hover {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Media Queries */
+@media screen and (max-width: 480px) {
+    .machine-container {
+        padding: 1rem;
+    }
+
+    .actions button {
+        padding: 0.8rem;
+    }
+}

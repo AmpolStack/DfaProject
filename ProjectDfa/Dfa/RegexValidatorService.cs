@@ -6,8 +6,8 @@ using ProjectDfa.Dfa.RegexValidator;
 namespace ProjectDfa.Dfa;
 
 public class RegexValidatorService(
-    IDfa<ValidateInputRequest, RegexValidatorStates> regexDfa,
-    IDfa<EmailValidatorStates> emailDfa
+    IDfa<ValidateInputRequest, char, RegexValidatorStates> regexDfa,
+    IDfa<EmailValidatorStates, char> emailDfa
     ) : IRegexValidatorService
 {
     public bool Validate(ValidateInputRequest request)

@@ -2,11 +2,11 @@
 
 namespace ProjectDfa.Dfa.EmailValidator;
 
-public class EmailValidatorDfa : IDfa<EmailValidatorStates>
+public class EmailValidatorDfa : IDfa<EmailValidatorStates, char>
 {
-    public DfaBase<EmailValidatorStates> BuildDfa()
+    public DfaBase<EmailValidatorStates,char> BuildDfa()
     {
-        var dfa = new DfaBase<EmailValidatorStates>()
+        var dfa = new DfaBase<EmailValidatorStates, char>()
         {
             StartState = EmailValidatorStates.Init,
             AcceptStates = [EmailValidatorStates.Accepted]
@@ -19,7 +19,7 @@ public class EmailValidatorDfa : IDfa<EmailValidatorStates>
         return dfa;
     }
 
-    private static void BuildBaseCharsTransitions(DfaBase<EmailValidatorStates> dfa)
+    private static void BuildBaseCharsTransitions(DfaBase<EmailValidatorStates, char> dfa)
     {
         var allowedBaseChars = new HashSet<char>();
         
@@ -40,7 +40,7 @@ public class EmailValidatorDfa : IDfa<EmailValidatorStates>
         }
     }
 
-    private static void BuildSpecialCharsTransitions(DfaBase<EmailValidatorStates> dfa)
+    private static void BuildSpecialCharsTransitions(DfaBase<EmailValidatorStates, char> dfa)
     {
         var allowedSpecialChars = new HashSet<char>()
         {
@@ -53,16 +53,14 @@ public class EmailValidatorDfa : IDfa<EmailValidatorStates>
         }
     }
 
-    private static void BuildAtSignTransitions(DfaBase<EmailValidatorStates> dfa)
+    private static void BuildAtSignTransitions(DfaBase<EmailValidatorStates, char> dfa)
     => dfa.Transitions.Add((EmailValidatorStates.LocalBaseChar, '@'), EmailValidatorStates.DomainBaseChar);
 
-    private static void BuildDotTransitions(DfaBase<EmailValidatorStates> dfa)
+    private static void BuildDotTransitions(DfaBase<EmailValidatorStates, char> dfa)
     {
         dfa.Transitions.Add((EmailValidatorStates.DomainBaseChar, '.'), EmailValidatorStates.DomainDot);
         dfa.Transitions.Add((EmailValidatorStates.Accepted, '.'), EmailValidatorStates.DomainDot);
     }
-
-
-
+    
 
 }

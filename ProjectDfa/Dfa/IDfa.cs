@@ -1,10 +1,10 @@
 ﻿namespace ProjectDfa.Dfa;
 
-public interface IDfa<in TData, TStates> where TStates : Enum
+public interface IDfa<in TData, TInput, TStates> where TStates : Enum
 {
-    public DfaBase<TStates> BuildDfa(TData data);
+    public DfaBase<TStates, TInput> BuildDfa(TData data);
 }
-public interface IDfa<TStates> where TStates : Enum
+public interface IDfa<TStates, TInput> where TStates : Enum
 {
-    public DfaBase<TStates> BuildDfa();
+    public DfaBase<TStates, TInput> BuildDfa();
 }
