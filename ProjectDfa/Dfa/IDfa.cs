@@ -1,6 +1,4 @@
-﻿using ProjectDfa.Dfa;
-
-namespace ProjectDfa.Services;
+﻿namespace ProjectDfa.Dfa;
 
 public interface IDfa<in TData, TInput, TStates> where TStates : Enum
 {

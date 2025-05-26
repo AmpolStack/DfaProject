@@ -1,4 +1,4 @@
-﻿namespace ProjectDfa.Dfa.VendingMachine;
+﻿namespace ProjectDfa.Dfa.Inputs;
 
 public enum VendingMachineInputs
 {

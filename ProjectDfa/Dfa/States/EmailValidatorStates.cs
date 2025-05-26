@@ -1,4 +1,4 @@
-﻿namespace ProjectDfa.Dfa.EmailValidator;
+﻿namespace ProjectDfa.Dfa.States;
 
 public enum EmailValidatorStates
 {

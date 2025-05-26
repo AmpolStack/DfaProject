@@ -1,7 +1,7 @@
 ﻿using ProjectDfa.Custom;
-using ProjectDfa.Services;
+using ProjectDfa.Dfa.States;
 
-namespace ProjectDfa.Dfa.RegexValidator;
+namespace ProjectDfa.Dfa.Implementations;
 
 public class RegexValidatorDfa : IDfa<ValidateInputBase, char, RegexValidatorStates> 
 {

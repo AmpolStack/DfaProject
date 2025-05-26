@@ -1,8 +1,7 @@
 ﻿using ProjectDfa.Dfa.Inputs;
 using ProjectDfa.Dfa.States;
-using ProjectDfa.Services;
 
-namespace ProjectDfa.Dfa.VendingMachine;
+namespace ProjectDfa.Dfa.Implementations;
 
 public class VendingMachineDfa : IDfa<VendingMachineStates, VendingMachineInputs>
 {

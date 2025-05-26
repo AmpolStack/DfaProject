@@ -1,4 +1,4 @@
-﻿namespace ProjectDfa.Dfa.RegexValidator;
+﻿namespace ProjectDfa.Dfa.States;
 
 public enum RegexValidatorStates
 {
