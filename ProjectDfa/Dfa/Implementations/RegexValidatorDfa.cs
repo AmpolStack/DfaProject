@@ -3,8 +3,19 @@ using ProjectDfa.Dfa.States;
 
 namespace ProjectDfa.Dfa.Implementations;
 
+/// <summary>
+/// Implementation of a configurable DFA for validating strings against regex-like patterns
+/// Implementación de un DFA configurable para validar cadenas contra patrones tipo regex
+/// </summary>
 public class RegexValidatorDfa : IDfa<ValidateInputBase, char, RegexValidatorStates> 
 {
+    /// <summary>
+    /// Builds the DFA with transitions based on the validation configuration
+    /// Construye el DFA con transiciones basadas en la configuración de validación
+    /// </summary>
+    /// <param name="data">Configuration for allowed characters and patterns
+    /// Configuración para caracteres y patrones permitidos</param>
+    /// <returns>A configured DFA instance / Una instancia de DFA configurada</returns>
     public DfaBase<RegexValidatorStates, char> BuildDfa(ValidateInputBase data)
     {
         var dfa = new DfaBase<RegexValidatorStates, char>()

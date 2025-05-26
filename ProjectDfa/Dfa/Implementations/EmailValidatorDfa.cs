@@ -2,8 +2,17 @@
 
 namespace ProjectDfa.Dfa.Implementations;
 
+/// <summary>
+/// Implementation of a DFA for validating email addresses
+/// Implementación de un DFA para validar direcciones de correo electrónico
+/// </summary>
 public class EmailValidatorDfa : IDfa<EmailValidatorStates, char>
 {
+    /// <summary>
+    /// Builds the DFA with all transitions for email validation
+    /// Construye el DFA con todas las transiciones para validación de correos
+    /// </summary>
+    /// <returns>A configured DFA instance / Una instancia de DFA configurada</returns>
     public DfaBase<EmailValidatorStates,char> BuildDfa()
     {
         var dfa = new DfaBase<EmailValidatorStates, char>()
