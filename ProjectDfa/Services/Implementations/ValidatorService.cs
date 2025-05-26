@@ -1,9 +1,9 @@
 ﻿using ProjectDfa.Custom;
 using ProjectDfa.Dfa;
-using ProjectDfa.Dfa.EmailValidator;
-using ProjectDfa.Dfa.RegexValidator;
+using ProjectDfa.Dfa.States;
+using ProjectDfa.Services.Definitions;
 
-namespace ProjectDfa.Services;
+namespace ProjectDfa.Services.Implementations;
 
 public class ValidatorService(
     IDfa<ValidateInputRequest, char, RegexValidatorStates> regexDfa,

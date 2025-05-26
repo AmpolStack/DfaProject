@@ -1,4 +1,4 @@
-﻿namespace ProjectDfa.Services;
+﻿namespace ProjectDfa.Services.Definitions;
 
 public interface IMachineService
 {
