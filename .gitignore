@@ -1,5 +1,7 @@
 ﻿.idea
 bin
 obj
+.vs
+.github
 Properties
 appsettings.Development.json
