@@ -65,32 +65,36 @@ app.MapPost("/validate", ([FromBody] ValidateInputRequest request,
     });
 });
 
-app.MapGet("/machine/insertCoin", async (
-    [FromServices] IMachineService service) =>
+app.MapPost("/machine/insertCoin/{state}", async (
+    [FromServices] IMachineService service,
+    [FromRoute] VendingMachineStates state) =>
 {
-    var result = await service.ExecuteInsertCoin();
-    return GetMachineResult(result, "Moneda insertada correctamente.");
+    var result = await service.ExecuteInsertCoin(state, out var newState);
+    return GetMachineResultWithData(result, "Moneda insertada correctamente.", newState);
 });
 
-app.MapGet("/machine/selectProduct", async ([FromQuery] string name,
+app.MapPost("/machine/selectProduct/{name}/{state}", async ([FromRoute] string name,
+    [FromRoute] VendingMachineStates state,
     [FromServices] IMachineService service) =>
 {
-    var result = await service.ExecuteSelectProduct();
-    return GetMachineResult(result, $"Producto {name} seleccionado.");
+    var result = await service.ExecuteSelectProduct(state, out var newState);
+    return GetMachineResultWithData(result, $"Producto {name} seleccionado.", newState);
 });
 
-app.MapGet("/machine/requestChange", async (
+app.MapPost("/machine/requestChange/{state}", async (
+    [FromRoute] VendingMachineStates state,
     [FromServices] IMachineService service) =>
 {
-    var result = await service.ExecuteRequestChange();
-    return GetMachineResult(result, "Cambio expedido correctamente.");
+    var result = await service.ExecuteRequestChange(state, out var newState);
+    return GetMachineResultWithData(result, "Cambio expedido correctamente.", newState);
 });
 
-app.MapGet("/machine/dispense", async (
+app.MapPost("/machine/dispense/{state}", async (
+    [FromRoute] VendingMachineStates state,
     [FromServices] IMachineService service) =>
 {
-    var result = await service.ExecuteDispense();
-    return GetMachineResult(result, "Producto dispensado correctamente.");
+    var result = await service.ExecuteDispense(state, out var newState);
+    return GetMachineResultWithData(result, "Producto dispensado correctamente.", newState);
 });
 
 
@@ -113,4 +117,24 @@ static IResult GetMachineResult(bool result, string successMessage)
             Result = true 
         }); 
     }
+
+static IResult GetMachineResultWithData(bool result, string successMessage, VendingMachineStates state)
+{
+    if(!result){
+        return Results.BadRequest(new ProcessResponse()
+        {
+            Message = "Operación Invalida, el estado no cambia.",
+            Result = false,
+            
+        });
+    }
+    
+    return Results.Ok(new ProcessResponse<string>()
+    {
+        Message = successMessage,
+        Result = true,
+        Data = state.ToString()
+    }); 
+}
+
 

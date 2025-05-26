@@ -1,12 +1,14 @@
-﻿namespace ProjectDfa.Services.Definitions;
+﻿using ProjectDfa.Dfa.States;
+
+namespace ProjectDfa.Services.Definitions;
 
 public interface IMachineService
 {
-    public Task<bool> ExecuteInsertCoin();
+    public Task<bool> ExecuteInsertCoin(VendingMachineStates currentState,out VendingMachineStates newState);
 
-    public Task<bool> ExecuteSelectProduct();
+    public Task<bool> ExecuteSelectProduct(VendingMachineStates currentState,out VendingMachineStates newState);
 
-    public Task<bool> ExecuteRequestChange();
+    public Task<bool> ExecuteRequestChange(VendingMachineStates currentState,out VendingMachineStates newState);
 
-    public Task<bool> ExecuteDispense();
+    public Task<bool> ExecuteDispense(VendingMachineStates currentState,out VendingMachineStates newState);
 }

@@ -7,41 +7,41 @@ namespace ProjectDfa.Services.Implementations;
 
 public class MachineService : IMachineService
 {
-    private static VendingMachineStates _currentState= VendingMachineStates.WaitingForCoin;
     private readonly IDfa<VendingMachineStates, VendingMachineInputs> _machineDfa;
     
     public MachineService(IDfa<VendingMachineStates, VendingMachineInputs> machineDfa)
     {
         _machineDfa = machineDfa;
     }
-    private bool ExecuteTransition(VendingMachineInputs input)
+    private bool ExecuteTransition(Tuple<VendingMachineStates, VendingMachineInputs> tuple ,out VendingMachineStates newState)
     {
         var dfa = _machineDfa.BuildDfa();
-        Console.WriteLine("Current State: " +  _currentState);
-        var contains = dfa.Transitions.TryGetValue((_currentState, input), out var transition);
+        Console.WriteLine("Current State: " + tuple.Item2);
+        var contains = dfa.Transitions.TryGetValue((tuple.Item1, tuple.Item2), out var transition);
         if (contains)
         {
-            _currentState = transition;
-            Console.WriteLine("Now Current State: " + _currentState);
+            newState = transition;
+            Console.WriteLine("Now Current State: " + tuple.Item2);
 
         }
         else
         {
+            newState = tuple.Item1;
             Console.WriteLine("Transition not found");
         }
+        
         return contains;
     }
 
-    public Task<bool> ExecuteInsertCoin()
-        => Task.FromResult(ExecuteTransition(VendingMachineInputs.InsertCoin));
+    public Task<bool> ExecuteInsertCoin(VendingMachineStates currentState,out VendingMachineStates newState)
+        => Task.FromResult(ExecuteTransition(new Tuple<VendingMachineStates, VendingMachineInputs>(currentState, VendingMachineInputs.InsertCoin), out newState));
     
-    public Task<bool> ExecuteSelectProduct()
-        => Task.FromResult(ExecuteTransition(VendingMachineInputs.SelectProduct));
+    public Task<bool> ExecuteSelectProduct(VendingMachineStates currentState,out VendingMachineStates newState)
+        => Task.FromResult(ExecuteTransition(new Tuple<VendingMachineStates, VendingMachineInputs>(currentState, VendingMachineInputs.SelectProduct), out newState));
     
-    public Task<bool> ExecuteRequestChange()
-        => Task.FromResult(ExecuteTransition(VendingMachineInputs.RequestChange));
+    public Task<bool> ExecuteRequestChange(VendingMachineStates currentState,out VendingMachineStates newState)
+        => Task.FromResult(ExecuteTransition(new Tuple<VendingMachineStates, VendingMachineInputs>(currentState, VendingMachineInputs.RequestChange), out newState));
     
-    public Task<bool> ExecuteDispense()
-        => Task.FromResult(ExecuteTransition(VendingMachineInputs.Dispense));
-    
+    public Task<bool> ExecuteDispense(VendingMachineStates currentState,out VendingMachineStates newState)
+        => Task.FromResult(ExecuteTransition(new Tuple<VendingMachineStates, VendingMachineInputs>(currentState, VendingMachineInputs.Dispense), out newState));
 }
