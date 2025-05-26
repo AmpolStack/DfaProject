@@ -30,6 +30,9 @@ builder.Services.AddScoped<IMachineService, MachineService>();
 
 var app = builder.Build();
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+app.Urls.Add($"http://*:{port}");
+
 app.UseHttpsRedirection();
 
 // Enable CORS
