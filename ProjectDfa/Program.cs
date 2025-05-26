@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectDfa;
 using ProjectDfa.Custom;
 using ProjectDfa.Dfa;
-using ProjectDfa.Dfa.EmailValidator;
-using ProjectDfa.Dfa.RegexValidator;
-using ProjectDfa.Dfa.VendingMachine;
+using ProjectDfa.Dfa.Implementations;
+using ProjectDfa.Dfa.Inputs;
+using ProjectDfa.Dfa.States;
+using ProjectDfa.Services.Definitions;
+using ProjectDfa.Services.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,37 +34,68 @@ app.MapPost("/validate", ([FromBody] ValidateInputRequest request,
     [FromServices] IValidatorService service) =>
 {
     var result = service.Validate(request);
-    return result.Equals(false) ? Results.BadRequest("The request is invalid") : Results.Ok("The request is valid");
+    if(!result)
+    {
+        return Results.BadRequest(new ProcessResponse()
+        {
+            Message = "La entrada no cumple con los criterios especificados.",
+            Result = false
+        });
+    }
+
+    return Results.Ok(new ProcessResponse()
+    {
+        Message = "¡Validación exitosa! La entrada cumple con los criterios.",
+        Result = true
+    });
 });
 
 app.MapGet("/machine/insertCoin", async (
     [FromServices] IMachineService service) =>
 {
     var result = await service.ExecuteInsertCoin();
-    return result ? Results.Ok() : Results.BadRequest("The request is invalid");
+    return GetMachineResult(result, "Moneda insertada correctamente.");
 });
 
-app.MapGet("/machine/selectProduct", async (
+app.MapGet("/machine/selectProduct", async ([FromQuery] string name,
     [FromServices] IMachineService service) =>
 {
     var result = await service.ExecuteSelectProduct();
-    return result ? Results.Ok() : Results.BadRequest("The request is invalid");
+    return GetMachineResult(result, $"Producto {name} seleccionado.");
 });
 
 app.MapGet("/machine/requestChange", async (
     [FromServices] IMachineService service) =>
 {
     var result = await service.ExecuteRequestChange();
-    return result ? Results.Ok() : Results.BadRequest("The request is invalid");
+    return GetMachineResult(result, "Cambio expedido correctamente.");
 });
 
-app.MapGet("/machine/wait", async (
+app.MapGet("/machine/dispense", async (
     [FromServices] IMachineService service) =>
 {
     var result = await service.ExecuteDispense();
-    return result ? Results.Ok() : Results.BadRequest("The request is invalid");
+    return GetMachineResult(result, "Producto dispensado correctamente.");
 });
 
 
 app.Run();
+
+
+static IResult GetMachineResult(bool result, string successMessage)
+    {
+        if(!result){
+           return Results.BadRequest(new ProcessResponse()
+            {
+                Message = "Operación Invalida, el estado no cambia.",
+                Result = false 
+            });
+        }
+    
+        return Results.Ok(new ProcessResponse()
+        {
+            Message = successMessage,
+            Result = true 
+        }); 
+    }
 
