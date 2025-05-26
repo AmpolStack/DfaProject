@@ -5,19 +5,28 @@ Este proyecto implementa tres DFAs para validación de correos electrónicos, ex
 ## 1. Validador de Correos Electrónicos (EmailValidator)
 Verifica direcciones de correo electrónico validando parte local, @, dominio y extensión.
 
+### Tabla de Inputs del EmailValidator
+
+| Alias | Valor     |
+|-------|-----------|
+| a     | [a-z-0-9] |
+| b     | [._-%+]   |
+| c     | @         |
+| d     | .         |
+
 ### Tabla de Transiciones del EmailValidator
 
 | Estado Actual | Entrada (char) | Estado Siguiente | Descripción |
 |--------------|----------------|------------------|-------------|
-| Init | [a-zA-Z0-9] | LocalBaseChar | Primer carácter válido de la parte local |
-| LocalBaseChar | [a-zA-Z0-9] | LocalBaseChar | Continúa la parte local con caracteres válidos |
-| LocalBaseChar | [._-] | LocalSpecialChar | Carácter especial en la parte local |
-| LocalSpecialChar | [a-zA-Z0-9] | LocalBaseChar | Después de especial, vuelve a carácter normal |
-| LocalBaseChar | @ | AtSign | Separador de parte local y dominio |
-| AtSign | [a-zA-Z0-9] | DomainBaseChar | Primer carácter del dominio |
-| DomainBaseChar | [a-zA-Z0-9] | DomainBaseChar | Continúa el dominio |
-| DomainBaseChar | . | DomainDot | Punto en el dominio |
-| DomainDot | [a-zA-Z] | Accepted | Extensión del dominio (.com, .org, etc.) |
+| Init | a              | LocalBaseChar | Primer carácter válido de la parte local |
+| LocalBaseChar | a              | LocalBaseChar | Continúa la parte local con caracteres válidos |
+| LocalBaseChar | b              | LocalSpecialChar | Carácter especial en la parte local |
+| LocalSpecialChar | a              | LocalBaseChar | Después de especial, vuelve a carácter normal |
+| LocalBaseChar | c              | AtSign | Separador de parte local y dominio |
+| AtSign | a              | DomainBaseChar | Primer carácter del dominio |
+| DomainBaseChar | a              | DomainBaseChar | Continúa el dominio |
+| DomainBaseChar | d              | DomainDot | Punto en el dominio |
+| DomainDot | a              | Accepted | Extensión del dominio (.com, .org, etc.) |
 
 ### Diagrama del EmailValidator
 ![Diagrama del Validador de Correos](img/EmailValidatorDiagram.png)
@@ -36,6 +45,15 @@ Verifica direcciones de correo electrónico validando parte local, @, dominio y 
 ## 2. Máquina Expendedora (VendingMachine)
 
 La máquina expendedora simula un sistema real de venta de productos utilizando un autómata para controlar el flujo de operaciones y garantizar que las transiciones entre estados sean válidas.
+
+### Tabla de Inputs de la Máquina Expendedora
+
+| Alias | Nombre (en código) | Valor |
+|-------|-------------------|--------|
+| b     | InsertCoin | Evento de inserción |
+| c     | SelectProduct | Evento de selección |
+| a     | Dispense | Evento de entrega |
+| d     | RequestChange | Evento de devolución |
 
 ### Tabla de Transiciones Completa de la Máquina Expendedora
 
@@ -61,15 +79,40 @@ La máquina expendedora simula un sistema real de venta de productos utilizando 
 
 El RegexValidator es un autómata configurable que valida cadenas contra patrones específicos definidos por el usuario. A diferencia de los otros dos autómatas, este es más flexible ya que construye su tabla de transiciones dinámicamente basándose en el patrón proporcionado.
 
+### Tabla de Transiciones del Validador de Expresiones Regulares
+
+| Estado Actual | Entrada | Estado Siguiente | Descripción |
+|--------------|---------|------------------|-------------|
+| Start | a | Validate | Procesa letra |
+| Start | b | Validate | Procesa número |
+| Start | c | Validate | Procesa carácter especial |
+| Validate | a | Validate | Continúa procesando letras |
+| Validate | b | Validate | Continúa procesando números |
+| Validate | c | Validate | Continúa procesando especiales |
+
+### Diagrama del Validador de Expresiones Regulares
+![Diagrama del validador de expresiones regulares](img/RegexValidatorDiagram.png)
+
+> Nota: Las transiciones dependen de la configuración (allowLetters, allowNumbers, allowSpecials). La tabla muestra el caso donde todos están permitidos. El estado Validate es también un estado de aceptación.
+
+### Tabla de Patrones del Validador de Expresiones Regulares
+
+| Patrón | Valor        | Acción                                                                 |
+|-------|--------------|------------------------------------------------------------------------|
+| a     | [a-zA-Z]     | Permite letras mayúsculas y minúsculas                                 |
+| b     | [0-9]        | Permite numeros                                                        |
+| c     | [-_.!@#$%&*] | Permite los caracteres especiales definidos en ASCII (sin extensiones) |
+
+
 ### Ejemplos de Validación de Expresiones Regulares
 
 | Entrada | Patrón | Resultado | Explicación |
-|---------|---------|-----------|-------------|
-| "abc123" | ^[a-z0-9]+$ | ✅ Válido | Contiene solo letras minúsculas y números |
-| "ABC123" | ^[a-z0-9]+$ | ❌ Inválido | Contiene letras mayúsculas |
-| "123" | ^[0-9]+$ | ✅ Válido | Contiene solo números |
-| "test@" | ^[a-z]+@$ | ✅ Válido | Termina con @ |
-| "123.456" | ^\d+\.\d+$ | ✅ Válido | Número decimal válido |
+|---------|--------|-----------|-------------|
+| "abc123" | c      | ✅ Válido | Contiene solo letras minúsculas y números |
+| "ABC123" | ab     | ❌ Inválido | Contiene letras mayúsculas |
+| "123" | b      | ✅ Válido | Contiene solo números |
+| "test@" | ac     | ✅ Válido | Termina con @ |
+| "123.456" | bc     | ✅ Válido | Número decimal válido |
 
 ## Arquitectura
 
@@ -90,7 +133,7 @@ Cada autómata se compone de:
 
 ## Tecnologías Utilizadas
 
-ASP.NET Core (Minimal API), C# 9.0, HTML/CSS, Javascript
+ASP.NET Core (Minimal API), C# 8.0, HTML/CSS, Javascript
 
 ## Justificación DFA vs NFA
 

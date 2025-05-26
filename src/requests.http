@@ -1,0 +1,67 @@
+# Variables de entorno
+@host = https://localhost:7225
+
+### Validar una expresión regular
+POST {{host}}/validate
+Content-Type: application/json
+
+{
+    "input": "abc123",
+    "allowNumbers": true,
+    "allowLetters": true,
+    "allowSpecials": false
+}
+
+### Insertar moneda
+POST {{host}}/machine/insertCoin/WaitingForCoin
+Content-Type: application/json
+
+### Seleccionar producto (ejemplo con Coca Cola)
+POST {{host}}/machine/selectProduct/CocaCola/CoinInserted
+Content-Type: application/json
+
+### Dispensar producto
+POST {{host}}/machine/dispense/ProductSelected
+Content-Type: application/json
+
+### Solicitar cambio
+POST {{host}}/machine/requestChange/CoinInserted
+Content-Type: application/json
+
+# Ejemplos adicionales
+
+### Validar email (usando regex)
+POST {{host}}/validate
+Content-Type: application/json
+
+{
+    "input": "test@example.com",
+    "allowNumbers": true,
+    "allowLetters": true,
+    "allowSpecials": true
+}
+
+### Intentar seleccionar producto sin moneda (debe fallar)
+POST {{host}}/machine/selectProduct/Sprite/WaitingForCoin
+Content-Type: application/json
+
+### Solicitar cambio después de dispensar (vuelve a estado inicial)
+POST {{host}}/machine/requestChange/ProductDelivered
+Content-Type: application/json
+
+### Validar caracteres especiales
+POST {{host}}/validate
+Content-Type: application/json
+
+{
+    "input": "!@#$%",
+    "allowNumbers": false,
+    "allowLetters": false,
+    "allowSpecials": true
+}
+
+### Ciclo completo de máquina expendedora
+# 1. Insertar moneda
+POST {{host}}/machine/insertCoin/WaitingForCoin
+Content-Type: application/json
+

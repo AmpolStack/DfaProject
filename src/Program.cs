@@ -36,7 +36,7 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 
 // Enable CORS
-app.UseCors("LocalhostPolicy");
+// app.UseCors("LocalhostPolicy");
 
 //If 'permanent' parameter is set the response code is 301, else is 302
 app.MapGet("/", () => Results.Redirect("/home", permanent: true));

@@ -58,6 +58,10 @@ footer {
     gap: 0.5rem;
 }
 
+footer > p {
+    margin: 0;
+}
+
 footer a {
     color: var(--primary-color);
     text-decoration: none;
