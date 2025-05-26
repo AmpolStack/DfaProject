@@ -15,6 +15,5 @@ ENV ASPNETCORE_URLS=http://+:${PORT}
 ENV ASPNETCORE_ENVIRONMENT=Production
 
 EXPOSE ${PORT}
-
 # Ajusta aquí el nombre real de tu DLL
 ENTRYPOINT ["dotnet", "ProjectDfa.dll"]
