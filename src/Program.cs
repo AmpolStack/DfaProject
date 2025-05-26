@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
-using ProjectDfa;
-using ProjectDfa.Custom;
-using ProjectDfa.Dfa;
-using ProjectDfa.Dfa.Implementations;
-using ProjectDfa.Dfa.Inputs;
-using ProjectDfa.Dfa.States;
-using ProjectDfa.Services.Definitions;
-using ProjectDfa.Services.Implementations;
+using src;
+using src.Custom;
+using src.Dfa;
+using src.Dfa.Implementations;
+using src.Dfa.Inputs;
+using src.Dfa.States;
+using src.Services.Definitions;
+using src.Services.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 

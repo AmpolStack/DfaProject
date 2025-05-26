@@ -1,7 +1,7 @@
-﻿using ProjectDfa.Dfa.Inputs;
-using ProjectDfa.Dfa.States;
+﻿using src.Dfa.Inputs;
+using src.Dfa.States;
 
-namespace ProjectDfa.Dfa.Implementations;
+namespace src.Dfa.Implementations;
 
 /// <summary>
 /// Implementation of a DFA for controlling a vending machine's state transitions

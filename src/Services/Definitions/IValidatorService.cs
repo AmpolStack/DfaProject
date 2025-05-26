@@ -1,6 +1,6 @@
-﻿using ProjectDfa.Custom;
+﻿using src.Custom;
 
-namespace ProjectDfa.Services.Definitions;
+namespace src.Services.Definitions;
 
 public interface IValidatorService
 {

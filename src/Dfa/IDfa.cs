@@ -1,4 +1,4 @@
-﻿namespace ProjectDfa.Dfa;
+﻿namespace src.Dfa;
 
 /// <summary>
 /// Interface for constructing Deterministic Finite Automata with custom input data

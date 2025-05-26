@@ -1,4 +1,4 @@
-﻿namespace ProjectDfa.Custom;
+﻿namespace src.Custom;
 
 public class ValidateInputRequest : ValidateInputBase
 {

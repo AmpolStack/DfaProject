@@ -1,9 +1,9 @@
-﻿using ProjectDfa.Dfa;
-using ProjectDfa.Dfa.Inputs;
-using ProjectDfa.Dfa.States;
-using ProjectDfa.Services.Definitions;
+﻿using src.Dfa;
+using src.Dfa.Inputs;
+using src.Dfa.States;
+using src.Services.Definitions;
 
-namespace ProjectDfa.Services.Implementations;
+namespace src.Services.Implementations;
 
 public class MachineService : IMachineService
 {

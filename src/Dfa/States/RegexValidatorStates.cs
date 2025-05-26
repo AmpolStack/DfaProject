@@ -1,4 +1,4 @@
-﻿namespace ProjectDfa.Dfa.States;
+﻿namespace src.Dfa.States;
 
 /// <summary>
 /// States for the Regex Validator DFA

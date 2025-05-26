@@ -1,4 +1,4 @@
-﻿namespace ProjectDfa.Dfa;
+﻿namespace src.Dfa;
 
 /// <summary>
 /// Base class for implementing Deterministic Finite Automata

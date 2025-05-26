@@ -1,6 +1,6 @@
-﻿using ProjectDfa.Custom;
+﻿using src.Custom;
 
-namespace ProjectDfa;
+namespace src;
 
 public static class SetupViews
 {

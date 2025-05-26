@@ -1,4 +1,4 @@
-﻿namespace ProjectDfa.Custom;
+﻿namespace src.Custom;
 
 /// <summary>
 /// Base configuration class for the RegexValidator DFA

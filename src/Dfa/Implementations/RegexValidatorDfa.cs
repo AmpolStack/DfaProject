@@ -1,7 +1,7 @@
-﻿using ProjectDfa.Custom;
-using ProjectDfa.Dfa.States;
+﻿using src.Custom;
+using src.Dfa.States;
 
-namespace ProjectDfa.Dfa.Implementations;
+namespace src.Dfa.Implementations;
 
 /// <summary>
 /// Implementation of a configurable DFA for validating strings against regex-like patterns

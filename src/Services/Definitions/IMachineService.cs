@@ -1,6 +1,6 @@
-﻿using ProjectDfa.Dfa.States;
+﻿using src.Dfa.States;
 
-namespace ProjectDfa.Services.Definitions;
+namespace src.Services.Definitions;
 
 public interface IMachineService
 {

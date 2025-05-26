@@ -1,6 +1,6 @@
-﻿using ProjectDfa.Dfa.States;
+﻿using src.Dfa.States;
 
-namespace ProjectDfa.Dfa.Implementations;
+namespace src.Dfa.Implementations;
 
 /// <summary>
 /// Implementation of a DFA for validating email addresses

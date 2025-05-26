@@ -1,4 +1,4 @@
-﻿namespace ProjectDfa.Dfa.Inputs;
+﻿namespace src.Dfa.Inputs;
 
 /// <summary>
 /// Input events for the Vending Machine DFA
