@@ -11,16 +11,16 @@ using src.Services.Implementations;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add CORS configuration
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("LocalhostPolicy", policy =>
-    {
-        policy.WithOrigins("https://localhost:7225") // The port should match your launchSettings.json
-             .AllowAnyMethod()
-             .AllowAnyHeader()
-             .WithExposedHeaders("*");
-    });
-});
+// builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy("LocalhostPolicy", policy =>
+//     {
+//         policy.WithOrigins($"https://localhost:{port}") // The port should match your launchSettings.json
+//              .AllowAnyMethod()
+//              .AllowAnyHeader()
+//              .WithExposedHeaders("*");
+//     });
+// });
 
 builder.Services.AddScoped<IDfa<ValidateInputRequest, char, RegexValidatorStates>, RegexValidatorDfa>();
 builder.Services.AddScoped<IDfa<EmailValidatorStates, char>, EmailValidatorDfa>();
@@ -30,13 +30,13 @@ builder.Services.AddScoped<IMachineService, MachineService>();
 
 var app = builder.Build();
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
-app.Urls.Add($"http://*:{port}");
+// var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+// app.Urls.Add($"http://*:{port}");
 
 app.UseHttpsRedirection();
 
 // Enable CORS
-app.UseCors("LocalhostPolicy");
+// app.UseCors("LocalhostPolicy");
 
 //If 'permanent' parameter is set the response code is 301, else is 302
 app.MapGet("/", () => Results.Redirect("/home", permanent: true));
