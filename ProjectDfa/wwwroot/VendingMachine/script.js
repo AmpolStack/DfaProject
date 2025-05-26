@@ -1,19 +1,20 @@
-﻿class VendingMachineAPI {
+﻿let STATE = 'WaitingForCoin'
+class VendingMachineAPI {
     constructor() {
         this.baseUrl = '/machine';
         this.setupEventListeners();
     }
 
     setupEventListeners() {
-        document.getElementById('insert-coin').addEventListener('click', () => this.executeAction('insertCoin', 'COIN INSERTED',this.IncreaseCredit(1)));
-        document.getElementById('select-product').addEventListener('click', () => this.executeAction('selectProduct?name=A1', 'PRODUCT SELECTED'));
-        document.getElementById('dispense').addEventListener('click', () => this.executeAction('dispense', 'DELIVERED'));
-        document.getElementById('return-money').addEventListener('click', () => this.executeAction('requestChange', 'WAITING FOR COIN', this.RestartCredit(), 'info'));
+        document.getElementById('insert-coin').addEventListener('click', () => this.executeAction('insertCoin',this.IncreaseCredit(1)));
+        document.getElementById('select-product').addEventListener('click', () => this.executeAction('selectProduct/A1',));
+        document.getElementById('dispense').addEventListener('click', () => this.executeAction('dispense'));
+        document.getElementById('return-money').addEventListener('click', () => this.executeAction('requestChange', this.RestartCredit(), 'info'));
     }
-    async executeAction(subPath, changeState, OkCallback, popupType ){
+    async executeAction(subPath, OkCallback, popupType ){
         try {
-            const response = await fetch(`${this.baseUrl}/${subPath}`, {
-                method: 'GET',
+            const response = await fetch(`${this.baseUrl}/${subPath}/${STATE}`, {
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
             });
             const data = await response.json();
@@ -26,12 +27,12 @@
                 if(popupType != null){
                     showPopup(popupType, data.message);
                 }
-                
                 else{
                     showPopup('success', data.message);
                 }
                 
-                this.ChangeState(changeState);
+                STATE = data.data;
+                this.ChangeState(STATE);
                 
             } else {
                 showPopup('error', data.message);
